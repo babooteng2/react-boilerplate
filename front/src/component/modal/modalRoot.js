@@ -1,22 +1,42 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
+import ReactDOM from "react-dom";
 import { ModalContext } from "../context/modalContextProvider";
-import Portal from "./portal";
 
+const styledObj = {
+  display: "flex",
+  position: "fixed",
+  top: 0,
+  left: 0,
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  height: "100vh",
+  zIndex: -1,
+  background: "rgba(0,0,0,.3)",
+};
 const ModalRoot = () => {
   const {
-    component: Component,
-    isOpen,
+    isShow,
     hideModal,
-    modalProps,
+    modalContent: Component,
   } = useContext(ModalContext);
-  return (
-    Component &&
-    isOpen && (
-      <Portal selector="#portal">
-        <Component {...modalProps} isOpen={isOpen} hideModal={hideModal} />
-      </Portal>
-    )
-  );
+  /* console.log(
+    "in Modal - component type : ",
+    typeof Component,
+    typeof Component == "string"
+  ); */
+
+  if (isShow) {
+    return ReactDOM.createPortal(
+      <>
+        <div style={styledObj}>
+          <button onClick={hideModal}>&times;</button>
+          {typeof Component == "string" ? Component : <Component />}
+        </div>
+      </>,
+      document.querySelector("#modal-root")
+    );
+  } else return null;
 };
 
 export default ModalRoot;

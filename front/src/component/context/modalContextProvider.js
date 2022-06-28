@@ -1,35 +1,44 @@
 import React, { createContext, useState } from "react";
+import ModalRoot from "../modal/modalRoot";
 
-const ModalContext = createContext({
-  component: null,
-  isOpen: false,
+export const ModalContext = createContext({
+  modalContent: {},
+  isShow: false,
+  modalProps: {},
   showModal: () => {},
   hideModal: () => {},
 });
 
 const ModalContextProvider = ({ children }) => {
-  const showModal = ({ component, modalProps = {} }) => {
-    setState({ ...state, component, modalProps, isOpen: true });
+  const [data, setData] = useState({
+    modalContent: null,
+    modalProps: {},
+    isShow: false,
+  });
+
+  const showModal = ({ modalContent, modalProps = {} }) => {
+    setData({ ...data, modalContent, modalProps, isShow: true });
   };
 
   const hideModal = () => {
-    setState({ ...state, isOpen: false });
+    setData({ ...data, isShow: false });
   };
 
-  const initialState = {
-    component: null,
+  /* const initialState = {
+    modalContent: null,
+    isShow: false,
     modalProps: {},
-    isOpen: false,
     showModal,
     hideModal,
-  };
-
-  const [state, setState] = useState(initialState);
+  }; */
 
   return (
-    <ModalContext.Provider value={state}>{children}</ModalContext.Provider>
+    <ModalContext.Provider value={{ ...data, showModal, hideModal }}>
+      <ModalRoot />
+      {children}
+      {/* {state.isShow && <Modal content={state.modalContent} />} */}
+    </ModalContext.Provider>
   );
 };
 
 export default ModalContextProvider;
-export { ModalContext };

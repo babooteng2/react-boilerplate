@@ -1,5 +1,4 @@
-const Modal1 = ({ title, desc }) => {
-  console.log("title : ", title);
+const Modal3 = ({ title, desc }) => {
   return (
     <div>
       <div>title: {title}</div>
@@ -8,4 +7,4 @@ const Modal1 = ({ title, desc }) => {
   );
 };
 
-export default Modal1;
+export default Modal3;

@@ -2,7 +2,6 @@ import { BrowserRouter as Routes, useRoutes } from "react-router-dom";
 import LangContext from "./component/context/langContext";
 import UserContextProvider from "./component/context/userContextProvider";
 import ModalContextProvider from "./component/context/modalContextProvider";
-
 import routeData from "./router";
 
 const Router = () => useRoutes(routeData);
@@ -12,12 +11,12 @@ const App = () => {
   return (
     <LangContext.Provider value={langObj}>
       <UserContextProvider>
-        <ModalContextProvider>
-          <div id="portal" />
-          <Routes>
+        <Routes>
+          <ModalContextProvider>
+            <div id="modal-root" />
             <Router />
-          </Routes>
-        </ModalContextProvider>
+          </ModalContextProvider>
+        </Routes>
       </UserContextProvider>
     </LangContext.Provider>
   );
