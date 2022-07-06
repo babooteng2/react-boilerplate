@@ -4,6 +4,7 @@ import { AuthContext } from "../components/context/authProvider";
 
 const Login = () => {
   document.title = "LOG IN";
+  const handleOnHome = () => navigate("/");
   const { user, setUser, setLoggedIn } = useContext(AuthContext);
   const [info, setInfo] = useState({ user_id: "", user_pw: "" });
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log(" loadUser() ", user);
+    console.log("[user] ", user);
   }, [user]);
 
   return (
@@ -45,6 +46,7 @@ const Login = () => {
         />
         <button type="submit">로그인</button>
       </form>
+      <button onClick={handleOnHome}>홈</button>
     </div>
   );
 };
