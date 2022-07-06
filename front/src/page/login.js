@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/context/authProvider";
 
 const Login = () => {
-  const { loadUser, login } = useContext(AuthContext);
+  document.title = "LOG IN";
+  const { user, setUser, setLoggedIn } = useContext(AuthContext);
   const [info, setInfo] = useState({ user_id: "", user_pw: "" });
   const navigate = useNavigate();
   const handlerOnSubmit = (e) => {
     e.preventDefault();
     console.log(info);
     if (info.user_id && info.user_pw) {
-      login(info);
+      setUser(info);
+      setLoggedIn();
       navigate("/myinfo");
     } else {
       alert("아이디 또는 비번을 입력해주세요");
@@ -22,8 +24,8 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log(" loadUser() ", loadUser());
-  }, [loadUser]);
+    console.log(" loadUser() ", user);
+  }, [user]);
 
   return (
     <div>

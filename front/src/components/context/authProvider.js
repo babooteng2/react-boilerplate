@@ -2,24 +2,28 @@ import React, { createContext, useState } from "react";
 
 const initState = {
   user: {},
-  login: () => {},
+  setUser: () => {},
+  loggedIn: false,
+  setLoggedIn: () => {},
   logout: () => {},
-  loadUser: () => {},
 };
 
 export const AuthContext = createContext(initState);
 
 const AuthProvider = ({ children }) => {
   const [data, setData] = useState(initState);
-  const login = (prop) => {
+  const setUser = (prop) => {
     setData((prev) => ({ ...prev, user: prop }));
+  };
+  const setLoggedIn = () => {
+    setData((prev) => ({ ...prev, loggedIn: !prev.loggedIn }));
   };
   const logout = () => {
     setData((prev) => ({ ...prev, user: {} }));
   };
-  const loadUser = () => data?.user;
+
   return (
-    <AuthContext.Provider value={{ ...data, login, logout, loadUser }}>
+    <AuthContext.Provider value={{ ...data, setUser, setLoggedIn, logout }}>
       {children}
     </AuthContext.Provider>
   );
