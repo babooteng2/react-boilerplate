@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/context/authProvider";
+import { useAuth } from "../components/context/fakeAuthProvider";
 
 const MyInfo = () => {
+  const { user: fakeUser } = useAuth();
+  console.log("fakeUser ", fakeUser);
   document.title = "MY INFO";
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();

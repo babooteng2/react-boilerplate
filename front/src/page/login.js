@@ -1,8 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/context/authProvider";
+import { useAuth } from "../components/context/fakeAuthProvider";
 
 const Login = () => {
+  const { signin } = useAuth();
+  ///////////////////////////////////////
   document.title = "LOG IN";
   const handleOnHome = () => navigate("/");
   const { user, setUser, setLoggedIn } = useContext(AuthContext);
@@ -18,6 +21,8 @@ const Login = () => {
     } else {
       alert("아이디 또는 비번을 입력해주세요");
     }
+    //////////////////////////
+    signin(info);
   };
   const handlerOnChange = (e) => {
     const { value, name } = e.target;

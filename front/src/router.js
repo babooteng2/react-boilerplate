@@ -1,4 +1,5 @@
 import RequiredAuth from "./components/common/requiredAuth";
+import About from "./page/about";
 import Home from "./page/home";
 import Login from "./page/login";
 import MyInfo from "./page/myInfo";
@@ -13,6 +14,10 @@ const Router = [
         <MyInfo />
       </RequiredAuth>
     ),
+  },
+  {
+    path: "/about",
+    element: <About />,
   },
 ];
 
